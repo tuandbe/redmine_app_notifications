@@ -1,4 +1,4 @@
-class CreateAppNotifications < ActiveRecord::Migration
+class CreateAppNotifications < ActiveRecord::Migration[4.2]
   def change
     create_table :app_notifications do |t|
       t.datetime :created_on
