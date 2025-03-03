@@ -1,5 +1,4 @@
-# class AppNotificationsController < ApplicationController
-class AppNotificationsHookListener < Redmine::Hook::Listener
+class AppNotificationsController < ApplicationController
   unloadable
   # helper :app_notifications
   # include AppNotificationsHelper
