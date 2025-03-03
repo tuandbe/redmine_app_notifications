@@ -30,8 +30,7 @@ Redmine::Plugin.register :redmine_app_notifications do
       'faye_server_adress' => 'http://ip_address_or_name_of_your_server:9292/faye'
     }, :partial => 'settings/app_notifications_settings'
 end
-
-require_dependency 'app_notifications_hook_listener'
-require_dependency 'app_notifications_account_patch'
-require_dependency 'app_notifications_issues_patch'
-require_dependency 'app_notifications_journals_patch'
+require_dependency File.expand_path("app/app_notifications_hook_listener", __dir__)
+require_dependency File.expand_path("app/app_notifications_account_patch", __dir__)
+require_dependency File.expand_path("app/app_notifications_issues_patch", __dir__)
+require_dependency File.expand_path("app/app_notifications_journals_patch", __dir__)
