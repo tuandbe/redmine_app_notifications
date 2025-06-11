@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  faye-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.faye
+    container_name: redmine_faye_server
+    ports:
+      - "9292:9292"
+    environment:
+      - RACK_ENV=production
+    restart: unless-stopped
+    networks:
+      - redmine-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9292/faye"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  redmine-network:
+    driver: bridge
+    name: redmine-network 

@@ -1,0 +1,34 @@
+# Use Ruby 2.7 image optimized for ARM64 (Mac M1)
+FROM ruby:2.7-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apk add --no-cache \
+    build-base \
+    linux-headers \
+    tzdata
+
+# Copy Gemfile and Gemfile.lock
+COPY Gemfile Gemfile.lock ./
+
+# Install gems
+RUN bundle config set --local without 'test development' && \
+    bundle install
+
+# Copy Faye configuration
+COPY faye.ru ./
+
+# Expose port 9292
+EXPOSE 9292
+
+# Create non-root user for security
+RUN addgroup -g 1000 faye && \
+    adduser -D -s /bin/sh -u 1000 -G faye faye && \
+    chown -R faye:faye /app
+
+USER faye
+
+# Start Faye server
+CMD ["bundle", "exec", "rackup", "faye.ru", "-o", "0.0.0.0", "-p", "9292", "-s", "thin"] 
