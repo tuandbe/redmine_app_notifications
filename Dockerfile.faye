@@ -8,7 +8,9 @@ WORKDIR /app
 RUN apk add --no-cache \
     build-base \
     linux-headers \
-    tzdata
+    tzdata \
+    git \
+    wget
 
 # Copy Gemfile and Gemfile.lock
 COPY Gemfile Gemfile.lock ./

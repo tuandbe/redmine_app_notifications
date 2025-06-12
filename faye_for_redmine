@@ -20,13 +20,13 @@ set -e
 ###
 # Must modify
 ###
-IN_APP_NOTIFICATION_ROOT_PATH=/root/path/to/your/redmine_app_notifications
+IN_APP_NOTIFICATION_ROOT_PATH=/Users/tuannd/Desktop/Projects/hapo/pms/redmine5/plugins/redmine_app_notifications
 ###
 
 ###
 # Probably need to modify
 ###
-SUDO_USER=www-data
+SUDO_USER=tuannd
 ###
 
 ###
