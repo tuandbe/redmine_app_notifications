@@ -1,8 +1,8 @@
 module AppNotificationsJournalsPatch
-  extend ActiveSupport::Concern
-
-  included do
-    after_create :create_app_notifications_after_create_journal
+  def self.included(base)
+    base.class_eval do
+      after_create :create_app_notifications_after_create_journal
+    end
   end
 
   def create_app_notifications_after_create_journal
