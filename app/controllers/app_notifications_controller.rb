@@ -1,5 +1,7 @@
 class AppNotificationsController < ApplicationController
   unloadable
+  helper :application
+  helper :issues
 
   def index
     @app_notifications = AppNotification.includes(:issue, :author, :journal)
