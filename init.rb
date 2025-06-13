@@ -4,7 +4,7 @@ Redmine::Plugin.register :redmine_app_notifications do
   description 'App notifications plugin provides simple in application notifications. It can replace default e-mail notifications.'
   version '1.1'
   url 'https://github.com/MichalVanzura/redmine_app_notifications'
-  author_url 'https://github.com/MichalVanzura/redmine_app_notifications'
+  author_url 'http://example.com/about'
 
   menu :top_menu, :app_notifications, { :controller => 'app_notifications', :action => 'index' }, {
   	:caption => :notifications, 
@@ -29,6 +29,11 @@ Redmine::Plugin.register :redmine_app_notifications do
       'issue_priority_updated' => 'on',
       'faye_server_adress' => 'http://ip_address_or_name_of_your_server:9292/faye'
     }, :partial => 'settings/app_notifications_settings'
+
+  # Patches
+  Rails.configuration.to_prepare do
+    IssuesHelper.send(:include, RedmineAppNotifications::Patches::IssuesHelperPatch)
+  end
 end
 require_dependency File.expand_path('lib/app_notifications_hook_listener', __dir__)
 require_dependency File.expand_path('lib/app_notifications_account_patch', __dir__)
