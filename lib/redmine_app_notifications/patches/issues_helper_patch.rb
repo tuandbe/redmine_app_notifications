@@ -6,8 +6,9 @@ module RedmineAppNotifications
       extend ActiveSupport::Concern
 
       included do
-        # Ensure ApplicationHelper methods are available
-        include ApplicationHelper
+        # Ensure helper methods that IssuesHelper relies on are available
+        include CustomFieldsHelper unless included_modules.include?(CustomFieldsHelper)
+        include ApplicationHelper unless included_modules.include?(ApplicationHelper)
       end
     end
   end
